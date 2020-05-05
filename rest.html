@@ -1,0 +1,348 @@
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+
+header{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(150deg,  rgb(23, 23, 26) 15%, #2a3147 70%, #1e1e2c 94%);
+    min-height: 4rem;
+    color: dodgerblue;
+    padding-top: 20px;
+    font-size: 40px;
+    
+}
+
+#flag_area{
+    margin-bottom: 50px;
+}
+
+body{
+    background: whitesmoke;
+}
+
+
+
+#country, #capital{
+color: rgb(255, 136, 0);
+}
+
+#calling_code, #time_zone, #top_domain,#alpha2_code, #alpha3_code, #alt_spell, #region, #sub_region, #population, #latitude, #longitude, #demonym, #area, #native_name, #numeric_code, #languages, #native_languages, #regional_blocs, #cioc{
+    color: dodgerblue;
+}
+
+#currency {
+    color: yellowgreen;
+}
+
+
+
+
+
+</style>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>REST</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"> 
+    </head>
+    <body>
+       
+    </body>
+</html>
+
+
+
+<script>
+    var title = document.createElement("header");
+document.body.appendChild(title);
+var navi = document.createElement("nav");
+navi.className = "navbar navbar-expand-md bg-dark navbar-dark fixed-top";
+var marq = document.createElement("marquee");
+marq.append("COUNTRIES DETAILS AT A GLANCE");
+navi.appendChild(marq);
+title.appendChild(navi);
+
+
+
+var container = document.createElement("div");
+container.className = "container w=100 mw-100 row mx-auto justify-content-around";
+document.body.append(container)
+
+
+
+
+fetch("https://restcountries.eu/rest/v2/all")
+.then(res => res.json())
+.then(data => initialize(data))
+.catch(err => console.log("Error:", err));
+
+function initialize(countriesData){
+    countries = countriesData;
+    for(i=0; i<countries.length; i++){
+       var insider = document.createElement("div");
+       insider.className = "col-md-3 m-1 bg-grey border rounded border-grey shadow-lg p-4 mb-4 align-middle overflow-auto";
+       container.appendChild(insider);
+
+       var tile = document.createElement("div");
+       tile.className = "tile text-dark h5";
+       insider.appendChild(tile);
+
+        var flag_area = document.createElement("div");
+        flag_area.id = "flag_area";
+        tile.appendChild(flag_area);
+        var flag = document.createElement("img");
+        flag.id = "flag";
+        flag.src = countriesData[i].flag;
+        flag.classList.add('card-img-top', 'rounded', 'mt-1');
+        flag_area.append(flag);
+      
+
+       var country = document.createElement("p");
+       tile.appendChild(country);
+       country.append("Country: ");
+
+       var count_span = document.createElement("span");
+       count_span.id = "country";
+       country.appendChild(count_span);
+       count_span.append(countries[i].name);
+
+       var cap = document.createElement("p");
+       tile.appendChild(cap);
+       cap.append("Capital: ");
+
+       var cap_span = document.createElement("span");
+       cap_span.id = "capital";
+       cap.appendChild(cap_span);
+       cap_span.append(countries[i].capital);
+
+       var calling_code = document.createElement("p");
+       tile.appendChild(calling_code);
+       calling_code.append("Calling Code: ");
+
+       var call_span = document.createElement("span");
+       call_span.id = "calling_code";
+       calling_code.appendChild(call_span);
+       call_span.append("+"+countriesData[i].callingCodes);
+
+       var time_zone = document.createElement("p");
+       tile.appendChild(time_zone);
+       time_zone.append("Time Zone: ");
+
+       var time_span = document.createElement("span");
+       time_span.id = "time_zone";
+       time_zone.appendChild(time_span);
+       time_span.append(countriesData[i].timezones);
+
+
+       var top_domain = document.createElement("p");
+       tile.appendChild(top_domain);
+       top_domain.append("Top Level Domain: ");
+
+       var topDomain_span = document.createElement("span");
+       topDomain_span.id = "top_domain";
+       top_domain.appendChild(topDomain_span);
+       topDomain_span.append(countriesData[i].topLevelDomain);
+
+
+       var alpha2 = document.createElement("p");
+       tile.appendChild(alpha2);
+       alpha2.append("Alpha2 Code: ");
+
+       var alpha2_span = document.createElement("span");
+       alpha2_span.id = "alpha2_code";
+       alpha2.appendChild(alpha2_span);
+       alpha2_span.append(countriesData[i].alpha2Code);
+       
+       var alpha3 = document.createElement("p");
+       tile.appendChild(alpha3);
+       alpha3.append("Alpha3 Code: ");
+
+       var alpha3_span = document.createElement("span");
+       alpha3_span.id = "alpha3_code";
+       alpha3.appendChild(alpha3_span);
+       alpha3_span.append(countriesData[i].alpha3Code);
+
+       var altspell = document.createElement("p");
+       tile.appendChild(altspell);
+       altspell.append("Alternate Spellings: ");
+
+
+       var altspell_span = document.createElement("span");
+       altspell_span.id = "alt_spell";
+       altspell.appendChild(altspell_span);
+       altspell_span.append(countriesData[i].altSpellings);
+
+       var region = document.createElement("p");
+       tile.appendChild(region);
+       region.append("Region: ");
+
+       var region_span = document.createElement("span");
+       region_span.id = "region";
+       region.appendChild(region_span);
+       region_span.append(countriesData[i].region);
+
+       var sub_region = document.createElement("p");
+       tile.appendChild(sub_region);
+       sub_region.append("Subregion: ");
+
+       var subregion_span = document.createElement("span");
+       subregion_span.id = "sub_region";
+       sub_region.appendChild(subregion_span);
+       subregion_span.append(countriesData[i].subregion);
+
+       var population = document.createElement("p");
+       tile.appendChild(population);
+       population.append("Population: ");
+
+       var pop_span = document.createElement("span");
+       pop_span.id = "population";
+       population.appendChild(pop_span);
+       pop_span.append(countriesData[i].population);
+
+
+       var lat = document.createElement("p");
+       tile.appendChild(lat);
+       lat.append("Latitude: ");
+
+       var lat_span = document.createElement("span");
+       lat_span.id = "latitude";
+       lat.appendChild(lat_span);
+       lat_span.append(countriesData[i].latlng[0]);
+
+       var lon = document.createElement("p");
+       tile.appendChild(lon);
+       lon.append("Longitude: ");
+
+       var lon_span = document.createElement("span");
+       lon_span.id = "longitude";
+       lon.appendChild(lon_span);
+       lon_span.append(countriesData[i].latlng[1]);
+
+
+       var demonym = document.createElement("p");
+       tile.appendChild(demonym);
+       demonym.append("Demonym: ");
+
+       var dem_span = document.createElement("span");
+       dem_span.id = "demonym";
+       demonym.appendChild(dem_span);
+       dem_span.append(countriesData[i].demonym);
+
+       var area = document.createElement("p");
+       tile.appendChild(area);
+       area.append("Area: ");
+
+       var area_span = document.createElement("span");
+       area_span.id = "area";
+       area.appendChild(area_span);
+       area_span.append(countriesData[i].area);
+
+
+       var native_name = document.createElement("p");
+       tile.appendChild(native_name);
+       native_name.append("Native Name: ");
+
+       var nn_span = document.createElement("span");
+       nn_span.id = "native_name";
+       native_name.appendChild(nn_span);
+       nn_span.append(countriesData[i].nativeName);
+
+       var numer_code = document.createElement("p");
+       tile.appendChild(numer_code);
+       numer_code.append("Numeric Code: ");
+
+       var numc_span = document.createElement("span");
+       numc_span.id = "numeric_code";
+       numer_code.appendChild(numc_span);
+       numc_span.append(countriesData[i].numericCode);
+
+        var currency = document.createElement("p");
+        tile.appendChild(currency);
+        
+
+        var curr_span = document.createElement("span");
+        curr_span.id = "currency";
+        currency.appendChild(curr_span);
+        curr_span.append("Currency-Code: "+countriesData[i].currencies[0].code + ",  " + "Currency-Name: " + countriesData[i].currencies[0].name + ",  "+ "Currency-Symbol: " + countriesData[i].currencies[0].symbol)
+
+
+
+        var languages = document.createElement("p")
+        tile.appendChild(languages);
+        languages.append("Languages: ");
+
+        var lang_span = document.createElement("span");
+        lang_span.id = "languages";
+        languages.appendChild(lang_span);
+
+        for(j=0; j<countriesData[i].languages.length; j++){
+            lang_span.append(countriesData[i].languages[j].name + ", ");
+        }
+
+        var nat_languages = document.createElement("p")
+        tile.appendChild(nat_languages);
+        nat_languages.append("Native Languages: ");
+
+        var natlang_span = document.createElement("span");
+        natlang_span.id = "native_languages";
+        nat_languages.appendChild(natlang_span);
+
+        for(j=0; j<countriesData[i].languages.length; j++){
+            natlang_span.append(countriesData[i].languages[j].nativeName + ", ");
+        
+        }
+
+        var regional_blocs = document.createElement("p");
+        tile.appendChild(regional_blocs);
+        regional_blocs.append("Regional Blocs: ");
+
+        var bloc_span = document.createElement("span");
+        bloc_span.id = "regional_blocs";
+        regional_blocs.appendChild(bloc_span);
+
+        if(countriesData[i].regionalBlocs.length !== 0){
+        for(k=0; k<countriesData[i].regionalBlocs.length; k++){
+            bloc_span.append(countriesData[i].regionalBlocs[k].acronym + " ("+countriesData[i].regionalBlocs[k].name+")")
+        }
+    }
+        else{
+            bloc_span.append("NONE")
+        }
+
+
+
+        var cioc = document.createElement("p");
+        tile.appendChild(cioc);
+        cioc.append("CIOC: ");
+
+        var cioc_span = document.createElement("span");
+        cioc_span.id = "cioc";
+        cioc.appendChild(cioc_span);
+        if (countriesData[i].cioc.length > 0){
+        cioc_span.append(countriesData[i].cioc);
+        }
+        else{
+            cioc_span.append("NONE")
+        }
+    
+       
+       
+    }
+}
+
+
+
+</script>
